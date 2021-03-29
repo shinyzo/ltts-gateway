@@ -1,0 +1,26 @@
+# Tomcat
+server:
+  port: 8989
+
+# Spring
+spring: 
+  application:
+    # 应用名称
+    name: ltts-gateway-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        namespace: fe1416ee-bac8-43dc-a4cc-68d3d74694e9
+        # 服务注册地址
+        server-addr: 192.168.230.147:8848
+        group: LTTS_GROUP
+
+
+
+
+
+
+
+
