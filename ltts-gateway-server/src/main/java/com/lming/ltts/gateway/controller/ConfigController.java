@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class ConfigController {
 
-    @Value("${useLocalCache:false}")
-    private boolean useLocalCache;
+    @Value("${name:11111}")
+    private String name;
 
     @RequestMapping("/get")
-    public boolean get() {
-        return useLocalCache;
+    public String get() {
+        return name;
     }
 }

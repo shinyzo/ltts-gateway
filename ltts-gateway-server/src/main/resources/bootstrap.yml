@@ -4,28 +4,18 @@ spring:
     nacos:
       discovery: #注册中心
         namespace: fe1416ee-bac8-43dc-a4cc-68d3d74694e9
+        group: LTTS_GROUP
         # 服务注册地址
         server-addr: 192.168.230.147:8848
-        group: LTTS_GROUP
       config: # 配置中心
         enabled: true
         namespace: fe1416ee-bac8-43dc-a4cc-68d3d74694e9
         server-addr: 192.168.230.147:8848
         shared-configs:
-          - {data-id: ltts-gateway-server-dev.yml, refresh: true,group: LTTS_GROUP}
-          - {data-id: router.yml, refresh: true, group: LTTS_GROUP}
-          - {data-id: redis.yml, refresh: true,group: LTTS_GROUP}
+          - {data-id: ltts-gateway.yml, refresh: true,group: LTTS_GROUP}
+          - {data-id: ltts-gateway-router.yml, refresh: true, group: LTTS_GROUP}
           - {data-id: nacos.yml, refresh: true,group: LTTS_GROUP}
-          - {data-id: router.yml, refresh: true, group: LTTS_GROUP}
-
-
-
-
-
-
-
-
-
-
+          - {data-id: hystrix.yml, refresh: true, group: LTTS_GROUP}
+          - {data-id: ribbon.yml, refresh: true, group: LTTS_GROUP}
 
 
