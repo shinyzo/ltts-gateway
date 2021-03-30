@@ -3,6 +3,7 @@ package com.lming.ltts.gateway.util;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -82,6 +83,6 @@ public class IpUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(isMatch("*.*.21.99","192.168.22.99"));
+        System.out.println(isMatch("*.*.22.99","192.168.22.99"));
     }
 }

@@ -33,7 +33,7 @@ public class AuthenticationGatewayFilterFactory extends AbstractGatewayFilterFac
     }
 
     @Override
-    public GatewayFilter apply(AuthenticationGatewayFilterFactory.Config config) {
+    public GatewayFilter apply(final AuthenticationGatewayFilterFactory.Config config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             URI uri = request.getURI();
