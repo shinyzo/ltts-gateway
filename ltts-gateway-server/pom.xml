@@ -21,9 +21,24 @@
 
 	<dependencies>
 
+		<!-- nacos 服务注册中心-->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+
+
+		<!-- nacos 配置中心-->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+
+
+		<!--服务熔断 Hystrix -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
 		</dependency>
 
 		<dependency>
@@ -43,10 +58,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- gateway -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 			<version>${spring.cloud.gateway.version}</version>
+		</dependency>
+
+		<!--  lombok-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

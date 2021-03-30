@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.support.NotFoundException;
+import org.springframework.cloud.gateway.support.TimeoutException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBufferFactory;
@@ -20,7 +21,7 @@ import reactor.core.publisher.Mono;
 /**
  * 网关统一异常处理
  *
- * @author ruoyi
+ * @author zhangliangming
  */
 @Order(-1)
 @Configuration
@@ -33,25 +34,23 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler
     {
         ServerHttpResponse response = exchange.getResponse();
 
-        if (exchange.getResponse().isCommitted())
-        {
+        if (exchange.getResponse().isCommitted()) {
             return Mono.error(ex);
         }
 
-        String msg;
+        String errorMsg;
 
-        if (ex instanceof NotFoundException)
-        {
-            msg = "服务未找到";
+        if (ex instanceof NotFoundException) {
+            errorMsg = "404,Service Not Found";
         }
-        else if (ex instanceof ResponseStatusException)
-        {
+        else if (ex instanceof ResponseStatusException) {
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
-            msg = responseStatusException.getMessage();
-        }
-        else
-        {
-            msg = "内部服务器错误";
+            errorMsg = responseStatusException.getMessage();
+        }else if(ex instanceof TimeoutException){
+            errorMsg = HttpStatus.GATEWAY_TIMEOUT + ",TimeoutException";
+        } else {
+            ex.printStackTrace();
+            errorMsg = "500,内部服务器错误";
         }
 
         log.error("[网关异常处理]请求路径:{},异常信息:{}", exchange.getRequest().getPath(), ex.getMessage());
@@ -61,7 +60,7 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler
 
         return response.writeWith(Mono.fromSupplier(() -> {
             DataBufferFactory bufferFactory = response.bufferFactory();
-            return bufferFactory.wrap(JSON.toJSONBytes(R.fail(msg)));
+            return bufferFactory.wrap(JSON.toJSONBytes(R.fail(errorMsg)));
         }));
     }
 }

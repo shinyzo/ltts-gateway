@@ -1,4 +1,4 @@
-package com.lming.ltts.gateway;
+package com.lming.ltts.gateway.config;
 
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
 import org.springframework.cloud.gateway.discovery.DiscoveryClientRouteDefinitionLocator;

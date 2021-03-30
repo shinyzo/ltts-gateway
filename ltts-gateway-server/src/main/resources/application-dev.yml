@@ -1,0 +1,38 @@
+server:
+  port: 1111
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: ltts-gateway-server
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+blackIpList: 119.*
+
+useLocalCache: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
