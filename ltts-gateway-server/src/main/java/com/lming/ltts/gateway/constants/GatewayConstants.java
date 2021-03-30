@@ -10,4 +10,6 @@ public interface GatewayConstants {
     String DYNAMIC_ROUTE_DATA_ID = "ltts-gateway-router.yml";
 
     String DYNAMIC_ROUTE_GROUP_ID = "LTTS_GROUP";
+
+    String IP_ADDRESS = "ipAddress";
 }

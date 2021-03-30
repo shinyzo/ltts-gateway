@@ -20,6 +20,12 @@ spring:
           filters:
             - Authentication=/*
             - StripPrefix=1
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 10
+#                redis-rate-limiter.burstCapacity: 20
+#                redis-rate-limiter.requestedTokens: 1
+
       default-filters:
       - name: Hystrix
         args:
@@ -35,7 +41,7 @@ management:
         include: "*"
 
 # 拦截的请求ip地址
-blackIpList: "192.*"
+blackIpList: "198.*"
 
 ##动态路由配置开关，开启则从配置中心获取，否者读取本地的配置
 gateway:
