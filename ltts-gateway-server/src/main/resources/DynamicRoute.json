@@ -1,0 +1,29 @@
+[
+  {
+    "id":"ltts-order",
+    "uri": "lb://ltts-order",
+    "predicates":[
+      {
+        "name":"Path",
+        "args":{
+          "patterns":"/order/**"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": 1
+        }
+      },
+      {
+        "name":"Hystrix",
+        "args":{
+          "name":"fallbackcmd",
+          "fallbackUri":"forward:/fallback"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+##动态路由配置开关，开启则从配置中心获取
+gateway:
+  dynamic:
+    route:
+      enabled: true
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        - id: ltts-order
+          uri: lb://ltts-order
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+      default-filters:
+      - name: Hystrix
+        args:
+          name : default
+          fallbackUri: 'forward:/defaultFallback'
