@@ -7,7 +7,7 @@ package com.lming.ltts.gateway.constants;
  */
 public interface GatewayConstants {
 
-    String DYNAMIC_ROUTE_DATA_ID = "GATEWAY_ROUTER";
+    String DYNAMIC_ROUTE_DATA_ID = "ltts-gateway-router.yml";
 
-    String DYNAMIC_ROUTE_GROUP_ID = "GATEWAY_GROUP";
+    String DYNAMIC_ROUTE_GROUP_ID = "LTTS_GROUP";
 }

@@ -1,5 +1,7 @@
-# Spring
+# Spring 注册中心，配置中心配置
 spring:
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery: #注册中心
@@ -11,11 +13,14 @@ spring:
         enabled: true
         namespace: fe1416ee-bac8-43dc-a4cc-68d3d74694e9
         server-addr: 192.168.230.147:8848
-        shared-configs:
-          - {data-id: ltts-gateway.yml, refresh: true,group: LTTS_GROUP}
-          - {data-id: ltts-gateway-router.yml, refresh: true, group: LTTS_GROUP}
-          - {data-id: nacos.yml, refresh: true,group: LTTS_GROUP}
-          - {data-id: hystrix.yml, refresh: true, group: LTTS_GROUP}
-          - {data-id: ribbon.yml, refresh: true, group: LTTS_GROUP}
+#        shared-configs:
+#          - {data-id: ltts-gateway.yml, refresh: true,group: LTTS_GROUP}
+#          - {data-id: ltts-gateway-router.yml, refresh: true, group: LTTS_GROUP}
+#          - {data-id: nacos.yml, refresh: true,group: LTTS_GROUP}
+#          - {data-id: hystrix.yml, refresh: true, group: LTTS_GROUP}
+#          - {data-id: ribbon.yml, refresh: true, group: LTTS_GROUP}
+
+
+
 
 

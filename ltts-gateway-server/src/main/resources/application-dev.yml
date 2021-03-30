@@ -6,6 +6,26 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: ltts-gateway-server
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        - id: ltts-order
+          uri: lb://ltts-order
+          predicates:
+            - Path=/order-service/**
+          filters:
+            - Authentication=/*
+            - StripPrefix=1
+      default-filters:
+      - name: Hystrix
+        args:
+          name : default
+          fallbackUri: 'forward:/defaultFallback'
+
 
 # 暴露监控端点
 management:
@@ -14,9 +34,19 @@ management:
       exposure:
         include: "*"
 
-blackIpList: 119.*
+# 拦截的请求ip地址
+blackIpList: "192.*"
 
-useLocalCache: true
+##动态路由配置开关，开启则从配置中心获取，否者读取本地的配置
+gateway:
+  dynamic:
+    route:
+      enabled: false
+
+
+
+
+
 
 
 

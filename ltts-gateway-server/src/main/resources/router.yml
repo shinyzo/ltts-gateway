@@ -2,7 +2,7 @@
 gateway:
   dynamic:
     route:
-      enabled: true
+      enabled: false
 
 spring:
   cloud:
@@ -15,8 +15,11 @@ spring:
         - id: ltts-order
           uri: lb://ltts-order
           predicates:
-            - Path=/order/**
+            - Path=/order-service/**
           filters:
+              - Authentication
+                args:
+                  authUrls: /*
             - StripPrefix=1
       default-filters:
       - name: Hystrix
