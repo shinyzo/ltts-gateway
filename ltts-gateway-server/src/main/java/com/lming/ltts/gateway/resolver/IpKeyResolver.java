@@ -19,9 +19,9 @@ public class IpKeyResolver implements KeyResolver {
 
     @Override
     public Mono<String> resolve(ServerWebExchange exchange) {
-        String ipAddress = exchange.getAttribute(IP_ADDRESS);
+        String ipAddress = exchange.getRequest().getRemoteAddress().getAddress().getHostAddress();
         log.info("IpKeyResolver 限流key : {}",ipAddress);
-        return Mono.just(Optional.ofNullable(ipAddress).orElse(""));
+        return Mono.just(ipAddress);
     }
 
 }
