@@ -38,6 +38,8 @@ spring:
           fallbackUri: 'forward:/defaultFallback'
 
 
+# 拦截的请求ip地址
+blackIpList: "198.*"
 
 # 暴露监控端点
 management:
@@ -46,8 +48,6 @@ management:
       exposure:
         include: "*"
 
-# 拦截的请求ip地址
-blackIpList: "198.*"
 
 ##动态路由配置开关，开启则从配置中心获取，否者读取本地的配置
 gateway:
@@ -70,6 +70,7 @@ hystrix:
           strategy: SEMAPHORE
           thread:
             timeoutInMilliseconds: 5000
+
 
 
 

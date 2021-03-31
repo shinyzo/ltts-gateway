@@ -1,6 +1,7 @@
 package com.lming.ltts.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.lming.ltts.gateway.common.R;
 import com.lming.ltts.gateway.util.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

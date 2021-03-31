@@ -11,7 +11,7 @@ public interface GatewayConstants {
 
     String DYNAMIC_ROUTE_GROUP_ID = "LTTS_GROUP";
 
-    String LOG_TRACE_ID = "TRACE_ID";
+    String LOG_TRACE_ID = "LOG_TRACE_ID";
 
-    String TRACE_ID_HEADER = "Header-Trace-id";
+    String TRACE_ID_HEADER = "TRACE_ID_HEADER";
 }
