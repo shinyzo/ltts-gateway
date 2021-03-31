@@ -15,6 +15,10 @@
 	<name>ltts-gateway</name>
     <packaging>pom</packaging>
 
+    <properties>
+        <java.version>8</java.version>
+    </properties>
+
     <modules>
         <module>ltts-gateway-server</module>
         <module>ltts-zuul-server</module>
