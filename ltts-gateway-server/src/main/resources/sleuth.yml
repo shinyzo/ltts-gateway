@@ -1,0 +1,8 @@
+spring:
+  zipkin:
+    base-url:
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1
+      rate: 10

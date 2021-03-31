@@ -1,15 +1,23 @@
 server:
   port: 1111
 
+logging:
+  level:
+    org.springframework.cloud.openfeign: debug
+    org.springframework.cloud.sleuth: debug
+
 spring:
-  redis:  # 采用redis 令牌桶算法 使用
-    host: 192.168.0.127
-    port: 6378
-    password: xjj87654321HN
   main:
     allow-bean-definition-overriding: true  # Bean重名覆盖
   application:
     name: ltts-gateway-server
+
+   ############################## redis 配置 ###########################
+  redis:  # 采用redis 令牌桶算法 使用
+    host: 192.168.0.127
+    port: 6378
+    password: xjj87654321HN
+  ############################### 网关配置 #############################
   cloud:
     gateway:
       discovery:
@@ -36,6 +44,13 @@ spring:
         args:
           name : default
           fallbackUri: 'forward:/defaultFallback'
+  ############################### 链路追踪配置 #############################
+  zipkin:
+    base-url: http://localhost:9411  # zipserver端
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1  # 采样比例 默认0.1
 
 
 # 拦截的请求ip地址
