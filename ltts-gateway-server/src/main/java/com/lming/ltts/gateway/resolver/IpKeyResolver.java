@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
 
-import static com.lming.ltts.gateway.constants.GatewayConstants.IP_ADDRESS;
 
 /**
  * Created by chenws on 2019/11/4.

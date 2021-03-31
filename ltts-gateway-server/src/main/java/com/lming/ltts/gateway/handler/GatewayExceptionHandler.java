@@ -1,7 +1,6 @@
 package com.lming.ltts.gateway.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.lming.ltts.gateway.common.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
