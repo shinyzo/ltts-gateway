@@ -13,12 +13,16 @@ spring:
         enabled: false
         namespace: ${nacos.namespaces}
         server-addr: ${nacos.server-addr}
+        group: ${nacos.gruop}
         shared-configs:
-          - {data-id: ltts-gateway.yml, refresh: true,group: LTTS_GROUP}
-          - {data-id: ltts-gateway-router.yml, refresh: true, group: LTTS_GROUP}
-          - {data-id: nacos.yml, refresh: true,group: LTTS_GROUP}
-          - {data-id: hystrix.yml, refresh: true, group: LTTS_GROUP}
-          - {data-id: ribbon.yml, refresh: true, group: LTTS_GROUP}
+          - dataId: ltts-gateway.yml
+            refresh: true
+          - dataId: ltts-gateway-router.yml
+            refresh: true
+          - dataId: hystrix.yml
+            refresh: true
+          - dataId: ribbon.yml
+            refresh: true
 
 
 
