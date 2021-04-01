@@ -1,6 +1,8 @@
 package com.lming.ltts.gateway.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -15,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/config")
 @RefreshScope
+@Api(tags = "配置API")
 public class ConfigController {
 
     @Value("${name:11111}")
     private String name;
 
     @RequestMapping("/get")
+    @ApiOperation(value = "配置文件获取")
     @SentinelResource("config")
     public String get() {
         return name;
