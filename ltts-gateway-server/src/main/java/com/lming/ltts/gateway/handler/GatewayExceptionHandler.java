@@ -42,13 +42,12 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler
 
         if (ex instanceof NotFoundException) {
             errorMsg = "404,Service Not Found";
-        }
-        else if (ex instanceof ResponseStatusException) {
+        } else if(ex instanceof TimeoutException){
+            errorMsg = "504,Gateway TimeoutException";
+        }else if (ex instanceof ResponseStatusException) {
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
             errorMsg = responseStatusException.getMessage();
-        }else if(ex instanceof TimeoutException){
-            errorMsg = HttpStatus.GATEWAY_TIMEOUT + ",TimeoutException";
-        } else {
+        }else {
             ex.printStackTrace();
             errorMsg = "500,内部服务器错误";
         }

@@ -5,6 +5,51 @@ logging:
   level:
     org.springframework.cloud.openfeign: debug
     org.springframework.cloud.sleuth: debug
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    reactor.ipc.netty: debug
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# 负载均衡请求处理的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+# Hystrix 断路器 2s超时，超时请求策略
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 5000
+
+# feign-sentinel 服务熔断配置
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+  compression:  #是否开启压缩
+    request:
+      enabled: true
+    response:
+      enabled: true
+
 
 spring:
   main:
@@ -12,13 +57,14 @@ spring:
   application:
     name: ltts-gateway-server
 
-   ############################## redis 配置 ###########################
+  ############################## redis 配置 ###########################
   redis:  # 采用redis 令牌桶算法 使用
-    host: 192.168.0.127
-    port: 6378
-    password: xjj87654321HN
-  ############################### 网关配置 #############################
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
+
   cloud:
+    ############################### 网关路由策略配置 #############################
     gateway:
       discovery:
         locator:
@@ -40,29 +86,40 @@ spring:
                 redis-rate-limiter.burstCapacity: 20 # 突发20个
                 redis-rate-limiter.requestedTokens: 1 # 每次请求消耗1个
       default-filters:  # 默认过滤器，熔断Hystrix
-      - name: Hystrix
-        args:
-          name : default
-          fallbackUri: 'forward:/defaultFallback'
+#      - name: Hystrix
+#        args:
+#          name : default
+#          fallbackUri: 'forward:/defaultFallback'
+      global-filter:
+        - name: Sentinel
+    ############################### sentinel 规则配置 #############################
+    sentinel:
+      enabled: true
+      eager: true
+      transport:
+        dashboard: localhost:8080
+      datasource:
+        ds1:
+          file:
+            file: "classpath:flowrule.json"
+            data-type: json
+            rule-type: flow
+#        ds1:
+#          nacos:
+#            server-addr: ${nacos.server-addr}
+#            dataId: ltts-gateway-sentinel
+#            groupId: ${nacos.gruop}
+#            data-type: json
+#            rule-type: flow
   ############################### 链路追踪配置 #############################
   zipkin:
-    base-url: http://localhost:9411  # zipserver端
     enabled: false
+    base-url: http://localhost:9411  # zipserver端
   sleuth:
     enabled: false
     sampler:
       probability: 1 # 采样比例 默认0.1,测试改成1.0
-
-
-# 拦截的请求ip地址
-blackIpList: "198.*"
-
-# 暴露监控端点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+  ############################### sentinel #############################
 
 
 ##动态路由配置开关，开启则从配置中心获取，否者读取本地的配置
@@ -72,20 +129,12 @@ gateway:
       enabled: false
 
 
-#负载均衡请求处理的超时时间
-ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
 
-# Hystrix 断路器 2s超时，超时请求策略
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          strategy: SEMAPHORE
-          thread:
-            timeoutInMilliseconds: 5000
+# 拦截的请求ip地址
+blackIpList: "198.*"
+
+
+
 
 
 

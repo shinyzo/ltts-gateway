@@ -1,5 +1,6 @@
 package com.lming.ltts.gateway.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -20,6 +21,7 @@ public class ConfigController {
     private String name;
 
     @RequestMapping("/get")
+    @SentinelResource("config")
     public String get() {
         return name;
     }
