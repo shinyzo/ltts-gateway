@@ -9,18 +9,6 @@ logging:
     org.springframework.web.reactive: debug
     reactor.ipc.netty: debug
 
-# 暴露监控端点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-# 负载均衡请求处理的超时时间
-ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
-
 # Hystrix 断路器 2s超时，超时请求策略
 hystrix:
   command:
@@ -31,37 +19,12 @@ hystrix:
           thread:
             timeoutInMilliseconds: 5000
 
-# feign-sentinel 服务熔断配置
-feign:
-  sentinel:
-    enabled: true
-  okhttp:
-    enabled: true
-  httpclient:
-    enabled: false
-  client:
-    config:
-      default:
-        connectTimeout: 10000
-        readTimeout: 10000
-  compression:  #是否开启压缩
-    request:
-      enabled: true
-    response:
-      enabled: true
-
-
 spring:
   main:
     allow-bean-definition-overriding: true  # Bean重名覆盖
   application:
     name: ltts-gateway-server
 
-  ############################## redis 配置 ###########################
-  redis:  # 采用redis 令牌桶算法 使用
-    host: ${redis.host}
-    port: ${redis.port}
-    password: ${redis.password}
 
   cloud:
     ############################### 网关路由策略配置 #############################
