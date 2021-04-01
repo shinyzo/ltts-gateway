@@ -9,6 +9,8 @@ logging:
     org.springframework.web.reactive: debug
     reactor.ipc.netty: debug
 
+
+
 # Hystrix 断路器 2s超时，超时请求策略
 hystrix:
   command:
@@ -24,8 +26,10 @@ spring:
     allow-bean-definition-overriding: true  # Bean重名覆盖
   application:
     name: ltts-gateway-server
-
-
+  redis:
+    host: 192.168.0.127
+    port: 6378
+    password: xjj87654321HN
   cloud:
     ############################### 网关路由策略配置 #############################
     gateway:
@@ -95,6 +99,12 @@ gateway:
 
 # 拦截的请求ip地址
 blackIpList: "198.*"
+
+
+nacos:
+  server-addr: 192.168.230.147:8848
+  namespaces: fe1416ee-bac8-43dc-a4cc-68d3d74694e9
+  gruop: LTTS_GROUP
 
 
 
